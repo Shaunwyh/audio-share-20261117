@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f1ea">
+  <title>好像时间又有点长 · 音频</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; padding: 28px; display: grid; place-items: center; background: #f5f1ea; color: #282721; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    main { width: min(100%, 540px); padding: 44px 32px 34px; border-radius: 24px; background: #fffdf9; border: 1px solid #e5dfd5; box-shadow: 0 18px 64px #302c2210; }
+    .mark { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; gap: 4px; border-radius: 16px; background: #ebe8df; margin-bottom: 30px; }
+    .mark i { display: block; width: 4px; background: #67694c; border-radius: 4px; }
+    .mark i:nth-child(1), .mark i:nth-child(5) { height: 12px; }
+    .mark i:nth-child(2), .mark i:nth-child(4) { height: 24px; }
+    .mark i:nth-child(3) { height: 34px; }
+    .label { margin: 0 0 12px; font-size: 12px; color: #76766a; letter-spacing: 3px; }
+    h1 { margin: 0 0 16px; font-size: clamp(24px, 6vw, 34px); font-weight: 600; line-height: 1.35; letter-spacing: -.6px; }
+    .hint { margin: 0 0 30px; color: #777569; font-size: 14px; line-height: 1.7; }
+    audio { width: 100%; display: block; border-radius: 30px; }
+    #status { margin: 15px 0 0; font-size: 13px; line-height: 1.7; color: #8b897e; }
+    @media (max-width: 420px) { body { padding: 16px; } main { padding: 32px 22px 28px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="label">音频</p>
+    <h1>好像时间又有点长</h1>
+    <p class="hint">点击播放，慢慢听。</p>
+    <audio id="player" controls autoplay preload="metadata" aria-label="播放好像时间又有点长">
+      <source src="./audio.mp3" type="audio/mpeg">
+      你的浏览器暂不支持音频播放。
+    </audio>
+    <p id="status" role="status">支持暂停、拖动进度和音量调节。</p>
+  </main>
+  <script>
+    const player = document.getElementById('player');
+    const status = document.getElementById('status');
+    player.addEventListener('error', () => { status.textContent = '音频加载失败，请刷新页面后重试。'; });
+    player.addEventListener('playing', () => { status.textContent = '正在播放'; });
+    player.addEventListener('pause', () => { status.textContent = '已暂停，可随时继续播放。'; });
+    player.addEventListener('ended', () => { status.textContent = '播放完毕。'; });
+  </script>
+</body>
+</html>
